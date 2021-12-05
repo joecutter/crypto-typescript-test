@@ -1,5 +1,5 @@
 import express from "express";
-import assetController from "../controllers/assetController";
+import assetController from "../controller/assetController";
 
 const router = express.Router();
 

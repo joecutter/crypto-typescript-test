@@ -3,6 +3,7 @@ import swaggerUi from "swagger-ui-express";
 import morgan from "morgan";
 import * as swaggerConfig from "./Docs";
 import * as dotenv from "dotenv";
+import { createConnection } from "typeorm";
 import routes from "./routes";
 
 const app = express();
@@ -47,13 +48,19 @@ const startApp = async () => {
     });
   });
 
-  //START THE SERVER
-  app.listen(PORT, () => {
-    console.log(`ENVIRONMENT ${process.env.NODE_ENV}`);
-    console.log(
-      `⚡️[server]: Server is running at http://${process.env.HOST}:${PORT}`
-    );
-  });
+  //db
+  createConnection()
+    .then(async (connection) => {
+      //START THE SERVER
+      app.listen(PORT, () => {
+        console.log("Database is up...!!");
+        console.log(`ENVIRONMENT ${process.env.NODE_ENV}`);
+        console.log(
+          `⚡️[server]: Server is running at http://${process.env.HOST}:${PORT}`
+        );
+      });
+    })
+    .catch((error) => console.log(error));
 };
 
 startApp();
