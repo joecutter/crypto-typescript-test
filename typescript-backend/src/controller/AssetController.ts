@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import axios, { AxiosResponse } from "axios";
 import { dbConnection } from "../db";
+import { getConnection } from "typeorm";
 import { Asset } from "../entity/Asset";
 
 async function healthCheck(req: Request, res: Response, next: NextFunction) {
@@ -40,34 +41,33 @@ async function getAsset(req: Request, res: Response, next: NextFunction) {
       code: 400,
       success: false,
       message: "Record(s) not found",
-      data: result,
+      result,
     });
   }
 
-  let assets = result.data;
+  let assets: Asset[] = result.data.result;
 
-  dbConnection
-    .then(async (connection) => {
-      for (let result of assets.result) {
-        await connection.manager.save(result);
-      }
+  const savedData = await getConnection()
+    .createQueryBuilder()
+    .insert()
+    .into(Asset)
+    .values(assets)
+    .execute();
 
-      return res.status(200).send({
-        code: 200,
-        success: true,
-        message: "Record(s) have been saved successfully.",
-      });
-    })
-    .catch((error) => {
-      console.error("Error ", error);
-
-      return res.status(400).send({
-        code: 400,
-        success: false,
-        message: "Record(s) not saved",
-        data: error,
-      });
+  if (!savedData) {
+    return res.status(400).send({
+      code: 400,
+      success: false,
+      message: "Record(s) not saved",
     });
+  }
+
+  return res.status(200).send({
+    code: 200,
+    success: true,
+    message: "Record(s) have been saved successfully.",
+    assets,
+  });
 }
 
 async function getAssetDetails(
@@ -89,7 +89,7 @@ async function getAssetDetails(
       code: 400,
       success: false,
       message: "Record(s) not found",
-      data: result,
+      result,
     });
   }
 
@@ -99,7 +99,7 @@ async function getAssetDetails(
     code: 200,
     success: true,
     message: "Record(s) have been found successfully.",
-    data: assets,
+    assets,
   });
 }
 

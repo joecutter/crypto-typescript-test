@@ -14,10 +14,10 @@ export class Asset {
   @Column({ name: "min_confirmation" })
   MinConfirmation: number;
 
-  @Column({ name: "withdraw_tx_fee" })
+  @Column({ name: "withdraw_tx_fee", type: "float" })
   WithdrawTxFee: number;
 
-  @Column({ name: "withdraw_tx_fee_percent" })
+  @Column({ name: "withdraw_tx_fee_percent", type: "float" })
   WithdrawTxFeePercent: number;
 
   @Column({ name: "system_protocol" })
