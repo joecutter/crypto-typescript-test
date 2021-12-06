@@ -1,4 +1,4 @@
-version: '3'
+version: '3.7'
 services:
   postgres:
     image: postgres
@@ -7,17 +7,19 @@ services:
       - POSTGRES_PASSWORD=password
       - POSTGRES_DB=test-db
     ports:
-    - "5438:5432"
+    - "5439:5432"
     volumes: 
       - ./postgres-data:/var/lib/postgresql/data
 
   test_frontend:
     build: './web'
     ports:
-    - "4204:4204"
+    - "4204:80"
 
   test_backend:
     build: './typescript-backend'
+    depends_on:
+      - postgres
     ports:
     - "4201:4201"
 

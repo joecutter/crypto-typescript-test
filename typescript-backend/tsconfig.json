@@ -1,5 +1,10 @@
 {
   "compilerOptions": {
+    "lib": ["es5", "es6"],
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "sourceMap": true,
     "target": "es6",
     "module": "commonjs",
     "rootDir": "./src",
@@ -7,6 +12,7 @@
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "strict": true,
+    "strictPropertyInitialization": false,
     "skipLibCheck": true /* Skip type checking of declaration files. */,
     "forceConsistentCasingInFileNames": true /* Disallow inconsistently-cased references to the same file. */
   }
