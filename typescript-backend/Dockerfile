@@ -1,6 +1,6 @@
 FROM node:12.16.1-alpine
 
-LABEL name="test-Backend"
+LABEL name="typescript-Backend"
 
 WORKDIR . /app
 

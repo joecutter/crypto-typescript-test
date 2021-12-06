@@ -11,10 +11,10 @@ services:
     volumes: 
       - ./postgres-data:/var/lib/postgresql/data
 
-  # test_frontend:
-  #   build: './web'
-  #   ports:
-  #   - "4204:4204"
+  test_frontend:
+    build: './web'
+    ports:
+    - "4204:80"
 
   test_backend:
     build: './typescript-backend'

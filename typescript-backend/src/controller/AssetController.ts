@@ -1,7 +1,14 @@
 import { Request, Response, NextFunction } from "express";
 import axios, { AxiosResponse } from "axios";
+import Query from "../query/AssetsRepo";
 
-function healthCheck(req: Request, res: Response, next: NextFunction) {
+async function healthCheck(req: Request, res: Response, next: NextFunction) {
+  return res
+    .status(200)
+    .send({ code: 200, success: true, message: "Health check is ✅" });
+}
+
+async function getAll(req: Request, res: Response, next: NextFunction) {
   return res
     .status(200)
     .send({ code: 200, success: true, message: "Health check is ✅" });
@@ -21,6 +28,10 @@ async function getAsset(req: Request, res: Response, next: NextFunction) {
   }
 
   let assets = result.data;
+
+  // for (let result of assets.result) {
+  //   await Query.savedAsset(result);
+  // }
 
   return res.status(200).send({
     code: 200,
@@ -61,4 +72,4 @@ async function getAssetDetails(
   });
 }
 
-export default { healthCheck, getAsset, getAssetDetails };
+export default { healthCheck, getAsset, getAssetDetails, getAll };

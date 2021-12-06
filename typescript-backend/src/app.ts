@@ -4,6 +4,7 @@ import morgan from "morgan";
 import * as swaggerConfig from "./Docs";
 import * as dotenv from "dotenv";
 import { createConnection } from "typeorm";
+import "reflect-metadata";
 import routes from "./routes";
 
 const app = express();
