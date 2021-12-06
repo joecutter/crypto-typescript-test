@@ -3,37 +3,53 @@ import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 @Entity()
 export class Asset {
   @PrimaryGeneratedColumn()
-  id!: number;
-  @Column()
-  Asset!: string;
-  @Column()
-  AssetLong!: string;
-  @Column()
-  MinConfirmation!: number;
-  @Column()
-  WithdrawTxFee!: number;
-  @Column()
-  WithdrawTxFeePercent!: number;
-  @Column()
-  SystemProtocol!: string;
-  @Column()
-  IsActive!: boolean;
-  @Column()
-  InfoMessage!: string;
-  @Column()
-  MaintenanceMode!: boolean;
-  @Column()
-  MaintenanceMessage!: string;
-  @Column()
-  FormatPrefix!: string;
-  @Column()
-  FormatSufix!: string;
-  @Column()
-  DecimalSeparator!: string;
-  @Column()
-  ThousandSeparator!: string;
-  @Column()
-  DecimalPlaces!: 8;
-  @Column()
-  withdrawal_fee_schedule!: string;
+  id: number;
+
+  @Column({ name: "asset" })
+  Asset: string;
+
+  @Column({ name: "asset_long" })
+  AssetLong: string;
+
+  @Column({ name: "min_confirmation" })
+  MinConfirmation: number;
+
+  @Column({ name: "withdraw_tx_fee" })
+  WithdrawTxFee: number;
+
+  @Column({ name: "withdraw_tx_fee_percent" })
+  WithdrawTxFeePercent: number;
+
+  @Column({ name: "system_protocol" })
+  SystemProtocol: string;
+
+  @Column({ name: "is_active" })
+  IsActive: boolean;
+
+  @Column({ name: "info_message" })
+  InfoMessage: string;
+
+  @Column({ name: "maintenance_mode" })
+  MaintenanceMode: boolean;
+
+  @Column({ name: "maintenance_message" })
+  MaintenanceMessage: string;
+
+  @Column({ name: "format_prefix" })
+  FormatPrefix: string;
+
+  @Column({ name: "format_sufix" })
+  FormatSufix: string;
+
+  @Column({ name: "decimal_separator" })
+  DecimalSeparator: string;
+
+  @Column({ name: "thousand_separator" })
+  ThousandSeparator: string;
+
+  @Column({ name: "decimal_place" })
+  DecimalPlaces: number;
+
+  @Column({ name: "withdrawal_fee_schedule" })
+  withdrawal_fee_schedule: string;
 }
